@@ -110,9 +110,25 @@ class Page:
                 while anw != 'okay':
                     anw = scr.textinput(f'hi {name}(email {mail}@gmail.com) you have paid a total amount of $1000','')
 
+def findFile():
+    filesLoct = __file__.split('\\')
+    filesLoct.pop(-1)
+    filesLoct.append('webs.json')
+    string = ''
+    counters = 0
+    for x in filesLoct:
+        counters += 1
+        string = string+x
+        if counters == len(filesLoct):
+            break
+        else:
+            string = string+'\\'
+
+    return string
+
 import random
 import json
-with open('D:\\Users\\guanc\\Documents\\coding\\pyme\\pyme\\play\\webs.json','r') as a:
+with open(findFile(),'r') as a:
     web = json.load(a)
 allPages = []
 pagenotfoundPage = Page("404",{"page not found" : [0,0,"orange",500,100,60,-100]})
@@ -174,7 +190,7 @@ while True:
         for savePage in allPages:
             pageToSave[savePage.title] = savePage.item
         print(pageToSave)
-        with open('D:\\Users\\guanc\\Documents\\coding\\pyme\\pyme\\play\\webs.json','w') as files:
+        with open(findFile(),'w') as files:
             files.write(json.dumps({'links': links, 'allPages': pageToSave},indent=4))
         turtle.bye()
         exit('the end, ps: i don\'t know how to stop this message from appearing')
